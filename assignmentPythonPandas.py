@@ -9,9 +9,9 @@ orders_df = pd.read_sql_query("SELECT * from orders", conn)
 sales_df = pd.read_sql_query("SELECT * from sales", conn)
 items_df = pd.read_sql_query("SELECT * from items", conn)
 
-cust_sales_df = cust_df.join(sales_df,on="customer_id",how="inner")
-sales_orders_df = orders_df.join(cust_sales_df,on="sales_id",how="inner")
-orders_items_df = items_df.join(sales_orders_df,on="item_id",how="inner")
+cust_sales_df = cust_df.merge(sales_df,on="customer_id",how="inner")
+sales_orders_df = orders_df.merge(cust_sales_df,on="sales_id",how="inner")
+orders_items_df = items_df.merge(sales_orders_df,on="item_id",how="inner")
 
 orders_items_df_not_null = orders_items_df[orders_items_df.quantity.notnull()]
 
