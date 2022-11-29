@@ -15,7 +15,7 @@ orders_items_df = items_df.merge(sales_orders_df,on="item_id",how="inner")
 
 orders_items_df_not_null = orders_items_df[orders_items_df.quantity.notnull()]
 
-final_df = orders_items_df_not_null.groupby('customer_id','age','item_name')['quantity'].sum()
+final_df = orders_items_df_not_null.groupby('customer_id','age','item_name')['quantity'].sum().reset_index()
 final_result = final_df[(final_df.age >18) & (final_df.age < 35)]
 
 
